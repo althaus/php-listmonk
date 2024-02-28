@@ -57,7 +57,7 @@ class ListmonkApi
      * @throws GuzzleException
      * @throws ApiServerException
      */
-    protected function request(string $method, string $path, array $data): array
+    protected function request(string $method, string $path, array $data): array|bool
     {
         $url = $this->url . $path;
         if (!$data) {
