@@ -17,9 +17,20 @@ class GetAllSubscribers
         $this->subscriberBuilder = $subscriberBuilder;
     }
 
-    public function __invoke(int $page = 1, int $perPage = 100): PaginatorModel
+    public function __invoke(?int $page = 1, ?int $perPage = 100, ?string $query = null): PaginatorModel
     {
-        $data = $this->api->get('/subscribers?page='.$page.'&per_page='.$perPage);
+        $params = [];
+        if (null !== $page) {
+            $params['page'] = $page;
+        }
+        if (null !== $perPage) {
+            $params['per_page'] = $perPage;
+        }
+        if (null !== $query) {
+            $params['query'] = $query;
+        }
+
+        $data = $this->api->get('/subscribers?' . http_build_query($params));
         $subscribers = array_map(fn(array $data) => $this->subscriberBuilder->__invoke($data), $data['results']);
 
         return new PaginatorModel(

@@ -38,10 +38,10 @@ class ListmonkSubscriberApi
         return $useCase->__invoke($subscriber, $preconfirmedSubscriptions);
     }
 
-    public function getAllSubscriber(int $page = 1, int $perPage = 100): PaginatorModel
+    public function getAllSubscriber(?int $page = 1, ?int $perPage = 100, ?string $query = null): PaginatorModel
     {
         $useCase = new GetAllSubscribers($this->api, $this->builder);
-        return $useCase->__invoke($page, $perPage);
+        return $useCase->__invoke($page, $perPage, $query);
     }
 
     /**
