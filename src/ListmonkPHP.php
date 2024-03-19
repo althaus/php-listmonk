@@ -6,6 +6,7 @@ use Junisan\ListmonkApi\API\ListmonkApi;
 use Junisan\ListmonkApi\API\ListmonkCampaignsApi;
 use Junisan\ListmonkApi\API\ListmonkListsApi;
 use Junisan\ListmonkApi\API\ListmonkSubscriberApi;
+use Junisan\ListmonkApi\API\ListmonkTransactionalMessageApi;
 use Psr\Http\Client\ClientInterface;
 
 class ListmonkPHP
@@ -14,6 +15,8 @@ class ListmonkPHP
     private ListmonkSubscriberApi $subscriberApi;
     private ListmonkListsApi $listsApi;
     private ListmonkCampaignsApi $campaignsApi;
+
+    private ListmonkTransactionalMessageApi $transactionalMessageApi;
 
     public function __construct(string $url, array $credentials = [], ClientInterface $client = null)
     {
@@ -24,6 +27,7 @@ class ListmonkPHP
         $this->subscriberApi = new ListmonkSubscriberApi($this->api);
         $this->listsApi = new ListmonkListsApi($this->api);
         $this->campaignsApi = new ListmonkCampaignsApi($this->api);
+        $this->transactionalMessageApi = new ListmonkTransactionalMessageApi($this->api);
     }
 
     public function getSubscribersApi(): ListmonkSubscriberApi
@@ -39,5 +43,10 @@ class ListmonkPHP
     public function getCampaignsApi(): ListmonkCampaignsApi
     {
         return $this->campaignsApi;
+    }
+
+    public function getTransactionalMessageApi(): ListmonkTransactionalMessageApi
+    {
+        return $this->transactionalMessageApi;
     }
 }
