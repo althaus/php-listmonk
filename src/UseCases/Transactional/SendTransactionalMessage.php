@@ -28,7 +28,7 @@ class SendTransactionalMessage
             'content_type' => $messageModel->getContentType(),
         ];
 
-        $dataResponse = $this->api->post('/api/tx', $data);
+        $dataResponse = $this->api->post('/tx', $data);
 
         return true === $dataResponse;
     }
